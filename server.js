@@ -9,6 +9,17 @@ app.use(parser.json());
 app.use(parser.urlencoded({extended: true}));
 app.use(express.static('client/build'));
 
+app.get('/reviews', function(req, res) {
+  db.collections('reviews').find().toArray(function(req, res) {
+    res.json(reviews);
+  });
+});
+
+app.post('/reviews', function(req, res) {
+  db.collections('reviews').save(req.body, function(err, result){
+    res.redirect('/');
+  })
+})
 
   app.listen(3000, function(){
     console.log("Listening on port 3000");
