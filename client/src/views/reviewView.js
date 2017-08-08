@@ -12,8 +12,8 @@ ReviewView.prototype = {
       var li = document.createElement('li');
       var text = document.createElement('p');
       var ul = document.getElementById('reviews');
-      liName.innerText = review.performer;
-      liTitle.innerText = review.showTitle;
+      liName.innerText = review.name;
+      liTitle.innerText = review.title;
       text.innerText = review.review;
       li.appendChild(text);
       ul.appendChild(liName);

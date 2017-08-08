@@ -70,7 +70,32 @@
 /* 0 */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/Users/glenyoung/homeworks/week_12/day_02/mongo_homework/client/src/views/quoteView.js'");
+var ReviewView = function(reviews){
+  this.render(reviews);
+}
+
+ReviewView.prototype = {
+  render: function(reviews){
+    
+    console.log(reviews);
+    reviews.forEach( function(review){
+      var liName = document.createElement('li');
+      var liTitle = document.createElement('li');
+      var li = document.createElement('li');
+      var text = document.createElement('p');
+      var ul = document.getElementById('reviews');
+      liName.innerText = review.name;
+      liTitle.innerText = review.title;
+      text.innerText = review.review;
+      li.appendChild(text);
+      ul.appendChild(liName);
+      ul.appendChild(liTitle);
+      ul.appendChild(li);
+    });
+  }
+}
+
+ module.exports = ReviewView;
 
 /***/ }),
 /* 1 */
@@ -95,9 +120,8 @@ var requestComplete = function() {
 
 var app = function(){
   var url = "http://localhost:3000/reviews"
-  makeRequest(url, requestComplete)
+  makeRequest(url, requestComplete);
 }
-
 
 window.addEventListener('load', app);
 

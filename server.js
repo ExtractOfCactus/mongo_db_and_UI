@@ -10,16 +10,34 @@ app.use(parser.urlencoded({extended: true}));
 app.use(express.static('client/build'));
 
 app.get('/reviews', function(req, res) {
-  db.collections('reviews').find().toArray(function(req, res) {
-    res.json(reviews);
+  db.collection('reviews').find().toArray(function(err, result) {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    res.json(result);
   });
 });
 
 app.post('/reviews', function(req, res) {
-  db.collections('reviews').save(req.body, function(err, result){
+  db.collection('reviews').save(req.body, function(err, result){
+    if (err) {
+      console.log(err);
+      return;
+    }
     res.redirect('/');
   });
 });
+
+app.post('/delete', function(req, res) {
+  db.collection('reviews').remove({}, function(err, result) {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    res.redirect("/");
+  })
+})
 
 MongoClient.connect('mongodb://localhost:27017/fringe_reviews', function(err, database) {
   if (err) {

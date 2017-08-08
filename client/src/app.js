@@ -1,4 +1,4 @@
-var ReviewView = require('./views/quoteView');
+var ReviewView = require('./views/reviewView');
 
 var makeRequest = function(url, callback) {
   var request = new XMLHttpRequest();
@@ -17,8 +17,7 @@ var requestComplete = function() {
 
 var app = function(){
   var url = "http://localhost:3000/reviews"
-  makeRequest(url, requestComplete)
+  makeRequest(url, requestComplete);
 }
-
 
 window.addEventListener('load', app);
