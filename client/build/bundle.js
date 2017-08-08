@@ -70,41 +70,32 @@
 /* 0 */
 /***/ (function(module, exports) {
 
-var ReviewView = function(reviews){
-  this.render(reviews);
-}
-
-ReviewView.prototype = {
-  render: function(reviews){
-    
-    console.log(reviews);
-    reviews.forEach( function(review){
-      var liName = document.createElement('li');
-      var liTitle = document.createElement('li');
-      var li = document.createElement('li');
-      var text = document.createElement('p');
-      var ul = document.getElementById('reviews');
-      liName.innerText = review.performer;
-      liTitle.innerText = review.showTitle;
-      text.innerText = review.review;
-      li.appendChild(text);
-      ul.appendChild(liName);
-      ul.appendChild(liTitle);
-      ul.appendChild(li);
-    });
-  }
-}
-
- module.exports = ReviewView;
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/Users/glenyoung/homeworks/week_12/day_02/mongo_homework/client/src/views/quoteView.js'");
 
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var QuoteView = __webpack_require__(0);
+var ReviewView = __webpack_require__(0);
+
+var makeRequest = function(url, callback) {
+  var request = new XMLHttpRequest();
+  request.open("GET", url);
+  request.addEventListener('load', callback);
+  request.send();
+}
+
+var requestComplete = function() {
+  if (this.status !== 200) return;
+
+  var reviewString = this.responseText;
+  var reviews = JSON.parse(reviewString);
+  var reviewView = new ReviewView(reviews);
+}
 
 var app = function(){
-  
+  var url = "http://localhost:3000/reviews"
+  makeRequest(url, requestComplete)
 }
 
 

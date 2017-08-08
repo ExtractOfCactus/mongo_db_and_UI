@@ -18,12 +18,23 @@ app.get('/reviews', function(req, res) {
 app.post('/reviews', function(req, res) {
   db.collections('reviews').save(req.body, function(err, result){
     res.redirect('/');
-  })
-})
+  });
+});
+
+MongoClient.connect('mongodb://localhost:27017/fringe_reviews', function(err, database) {
+  if (err) {
+    console.log(err);
+    return;
+  }
+
+  db = database;
+  console.log("Connected to ye olde database...")
 
   app.listen(3000, function(){
     console.log("Listening on port 3000");
   });
+});
+
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/client/build/index.html');
