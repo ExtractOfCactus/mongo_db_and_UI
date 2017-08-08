@@ -44,3 +44,7 @@ li {
   height:433px;
   background-color: black;
 }
+
+.reviews {
+  border: 2px solid blue;
+}
